@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "pdftools",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

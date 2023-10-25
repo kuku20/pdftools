@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "pdffreetools": {
+      "hosting": {
+        "pdftools": [
+          "pdffreetools"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "pdffreetools"
+  }
+}
