@@ -1,43 +1,56 @@
 import { Component, OnInit } from '@angular/core';
 import { PDFDocument, rgb } from 'pdf-lib';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-merge-split',
   templateUrl: './merge-split.component.html',
-  styleUrls: ['./merge-split.component.scss']
+  styleUrls: ['./merge-split.component.scss'],
 })
 export class MergeSplitComponent implements OnInit {
-
-  selectedFiles: File[] = [];
+  checked: any[] = [];
+  start!: number;
+  end!: number;
+  selectedFiles: any[] = [];
+  selectedFilesByte: any[] = [];
   constructor() {}
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.selectedFiles, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.selectedFiles, event.previousIndex, event.currentIndex );
+    moveItemInArray(this.selectedFilesByte, event.previousIndex, event.currentIndex );
+    moveItemInArray(this.checked, event.previousIndex, event.currentIndex );
   }
   ngOnInit(): void {}
-  onFilesSelected(event: any) {
+  async onFilesSelected(event: any) {
     const files = event.target.files;
     for (let i = 0; i < files.length; i++) {
-      if (files[0].type == 'application/pdf') this.selectedFiles.push(files[i]);
-      else alert('NOT A VALID PDF FILE');
+      if (files[0].type == 'application/pdf') {
+        const pdfBytes = await files[i].arrayBuffer();
+        const pdf = await PDFDocument.load(pdfBytes);
+        this.checked.push(pdf.getPageIndices());
+        this.selectedFiles.push(files[i]);
+        this.selectedFilesByte.push(pdf)
+      } else alert('NOT A VALID PDF FILE');
     }
+    const fileInput = document.getElementById("fileInput") as HTMLInputElement;
+    if(fileInput) fileInput.value = '';
     console.log(this.selectedFiles);
+    console.log(this.checked);
+    console.log(this.selectedFilesByte);
   }
   async mergePDFs() {
     const pdfDoc = await PDFDocument.create();
+    let i= 0
 
     // Add PDFs to be merged (Replace 'pdfUrl1' and 'pdfUrl2' with your PDF URLs)
-    const pdfUrls = this.selectedFiles;
 
-    for (const file of pdfUrls) {
-      const pdfBytes = await file.arrayBuffer();
-      const pdf = await PDFDocument.load(pdfBytes);
+    for (const pdf of this.selectedFilesByte) {
 
       // Use PDFDocument.copyPages to copy pages from the source PDF to the target PDF
-      const copiedPages = await pdfDoc.copyPages(pdf, pdf.getPageIndices());
+      const copiedPages = await pdfDoc.copyPages(pdf, this.checked[i]);
 
       // Add the copied pages to the target PDF
       copiedPages.forEach((page) => pdfDoc.addPage(page));
+      i++
     }
 
     // Serialize the merged PDF to bytes
@@ -72,8 +85,18 @@ export class MergeSplitComponent implements OnInit {
     // document.body.appendChild(iframe);
     displayDiv?.appendChild(iframe);
   }
-  remove(index:any){
-    this.selectedFiles.splice(index,1)
+  remove(index: any) {
+    this.selectedFiles.splice(index, 1);
+    this.checked.splice(index, 1);
+    this.selectedFilesByte.splice(index, 1);
   }
 
+  inputNumber(event: any, position: string) {
+    if (position === 'start' && event.target.value !=position) {
+      this.start = event.target.value;
+    } else if (position === 'end' && event.target.value !=position) {
+      this.end = event.target.value;
+    }
+    console.log(this.start, this.end);
+  }
 }
