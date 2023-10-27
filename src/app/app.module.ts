@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { MergeSplitComponent } from './merge-split/merge-split.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { SplitComponent } from './split/split.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MergeSplitComponent
+    MergeSplitComponent,
+    SplitComponent
   ],
   imports: [
     BrowserModule,

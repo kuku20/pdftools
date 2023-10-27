@@ -1,4 +1,7 @@
-<h1>Merge PDF Free</h1>
+
+    <h1>Merge PDF Free</h1>
+    <h4 routerLink="/split-pdf">Go to Split Pdf</h4>
+
 <div class="container">
     <div>
         <div class="file-input-container">
@@ -55,6 +58,8 @@
         </div>
         <button class="merge_btn" (click)="mergePDFs()" [disabled]="this.selectedFiles.length===0">Merge PDFs and
             Preview</button>
+            <div id="download">
+            </div>
     </div>
     <div id="display">
     </div>

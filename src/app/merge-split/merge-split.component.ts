@@ -84,6 +84,15 @@ export class MergeSplitComponent implements OnInit {
     iframe.id = 'pdfResult';
     displayDiv?.appendChild(iframe);
   }
+
+  download(url: any) {
+    const displayDiv = document.getElementById('download');
+    const downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    downloadLink.download = 'merged.pdf'; // Specify the filename
+    downloadLink.textContent = 'Download Merged PDF';
+    document.body.appendChild(downloadLink);
+  }
   remove(index: any) {
     this.selectedFiles.splice(index, 1);
     this.checked.splice(index, 1);

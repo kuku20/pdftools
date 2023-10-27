@@ -1,0 +1,40 @@
+<h1>Split PDF Free</h1>
+<h4 routerLink="/">Go to Merge Pdf</h4>
+<div class="container">
+    <div>
+        <div class="file-input-container">
+            <input id="fileInput" type="file" (change)="onFilesSelected($event)">
+        </div>
+
+        <div>
+            <h2>The PDF </h2>
+            <ng-container *ngIf="this.selectedFile">
+                <div class="example-list">
+                        <div class="example-box" >
+                            <div>
+                                 {{this.selectedFile.name}}
+                            </div>
+                            <div>
+                                <button (click)="remove(this.selectedFile)">🗑️</button>
+                            </div>
+                        </div>
+                        <div class="example-box" >
+                            <label for="page">Input a page want to get separate by coma.Min: 0, Max: {{pages[this.pages.length-1]}}</label>
+                            <input id="page" type="text" placeholder="0,1,2" (keyup)="getPage($event)" >
+                        </div>
+
+                </div>
+            </ng-container>
+        </div>
+        <button class="merge_btn" (click)="mergePDFs()" [disabled]="!this.selectedFile">Split and Merge PDF and
+            Preview</button>
+            
+    </div>
+    <div id="display">
+    </div>
+    <div id="download">
+    </div>
+</div>
+<ng-template #onlyone>
+    One page
+</ng-template>
