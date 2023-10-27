@@ -82,7 +82,6 @@ export class MergeSplitComponent implements OnInit {
     iframe.width = '900'; // Set the width in pixels
     iframe.height = '600'; // Set the height in pixels
     iframe.id = 'pdfResult';
-    // document.body.appendChild(iframe);
     displayDiv?.appendChild(iframe);
   }
   remove(index: any) {

@@ -1,7 +1,7 @@
-<h1>Split and Merge PDF Free</h1>
+<h1>Merge PDF Free</h1>
 <div class="container">
     <div>
-        <div>
+        <div class="file-input-container">
             <input id="fileInput" type="file" (change)="onFilesSelected($event)">
         </div>
 
@@ -14,7 +14,7 @@
                             <div>
                                 {{i}} - {{item.name}}
                             </div>
-                            <div>
+                            <div *ngIf="false">
                                 <div *ngIf="this.checked[i].length > 1">
                                     <label for="start">Start:</label>
                                     <select id="start" class="dropdown" (click)="inputNumber($event, 'start')">
@@ -40,7 +40,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <div *ngIf="this.checked[i].length > 1 ; else onlyone">
+                            <!-- <div *ngIf="this.checked[i].length > 1 ; else onlyone"> -->
+                            <div *ngIf="false">
                                 <label for="all">All:</label>
                                 <input type="checkbox" id="all" name="" checked>
                             </div>
