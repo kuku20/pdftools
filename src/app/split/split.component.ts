@@ -72,12 +72,15 @@ export class SplitComponent implements OnInit {
     this.selectedFile='';
   }
   download(url: any) {
+    var element = document.getElementById('downloadPdfId');
+    element?.remove();
     const displayDiv = document.getElementById('download');
     const downloadLink = document.createElement('a');
     downloadLink.href = url;
     downloadLink.download = 'merged.pdf'; // Specify the filename
     downloadLink.textContent = 'Download Merged PDF';
-    document.body.appendChild(downloadLink);
+    downloadLink.id = 'downloadPdfId';
+    displayDiv?.appendChild(downloadLink);
   }
   getPage(event: any) {
     console.log(event.target.value);
