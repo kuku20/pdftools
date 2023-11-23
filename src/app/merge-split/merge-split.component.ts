@@ -70,6 +70,7 @@ export class MergeSplitComponent implements OnInit {
     // document.body.appendChild(downloadLink);
     // Open the merged PDF in a new window for download
     // window.open(url);
+    this.download(url)
   }
 
   displayPdf(url: any) {
