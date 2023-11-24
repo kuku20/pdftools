@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^14.0.0-next.0",
     "@angular/platform-browser-dynamic": "^14.0.0-next.0",
     "@angular/router": "^14.0.0-next.0",
+    "ng2-adsense": "^11.0.0",
     "pdf-lib": "^1.17.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
